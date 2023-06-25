@@ -2,11 +2,14 @@ package com.seminario.microservicios.app.skynet.controllers;
 
 import com.seminario.microservicios.app.skynet.models.entity.Cliente;
 import com.seminario.microservicios.app.skynet.models.entity.Empleado;
+import com.seminario.microservicios.app.skynet.models.entity.Servicio;
 import com.seminario.microservicios.app.skynet.models.entity.Visita;
 import com.seminario.microservicios.app.skynet.services.IClienteService;
 import com.seminario.microservicios.app.skynet.services.IEmpleadoService;
+import com.seminario.microservicios.app.skynet.services.IServicioService;
 import com.seminario.microservicios.app.skynet.services.IVisitaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +20,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api")
+@CrossOrigin
 public class BaseController {
 
     @Autowired
@@ -27,6 +31,9 @@ public class BaseController {
 
     @Autowired
     private IVisitaService visitaService;
+
+    @Autowired
+    private IServicioService servicioService;
 
     /*-----------------------Controlador Empleado-----------------------------*/
 
@@ -57,11 +64,11 @@ public class BaseController {
             return ResponseEntity.notFound().build();
         }
         Empleado empleadoDb = e.get();
-        empleadoDb.setNombres(empleado.getNombres());
-        empleadoDb.setApellidos(empleado.getApellidos());
-        empleadoDb.setDireccion(empleado.getDireccion());
-        empleadoDb.setTelefono(empleado.getTelefono());
-        empleadoDb.setCui(empleado.getCui());
+        //empleadoDb.setNombres(empleado.getNombres());
+        //empleadoDb.setApellidos(empleado.getApellidos());
+        //empleadoDb.setDireccion(empleado.getDireccion());
+        //empleadoDb.setTelefono(empleado.getTelefono());
+        //empleadoDb.setCui(empleado.getCui());
         empleadoDb.setSupervisor(empleado.getSupervisor());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(empleadoService.save(empleadoDb));
@@ -129,6 +136,21 @@ public class BaseController {
     @GetMapping(value = "/visitas")
     public ResponseEntity<?> obtenerVisitas(){
         return ResponseEntity.ok().body(visitaService.findAll());
+    }
+
+
+    /*-----------------------------Controlador Serivicios----------------------*/
+
+    @GetMapping(value = "/servicios")
+    public ResponseEntity<?> obtenerServicios(){
+        return ResponseEntity.ok().body(servicioService.findAll());
+    }
+
+    @PostMapping(value = "/servicio/")
+    public ResponseEntity<?> crearServicio(@RequestBody Servicio servicio){
+        Servicio servicioDb = servicioService.save(servicio);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(servicioDb);
     }
 
 
