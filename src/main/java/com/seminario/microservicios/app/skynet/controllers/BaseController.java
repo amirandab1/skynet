@@ -64,11 +64,11 @@ public class BaseController {
             return ResponseEntity.notFound().build();
         }
         Empleado empleadoDb = e.get();
-        //empleadoDb.setNombres(empleado.getNombres());
-        //empleadoDb.setApellidos(empleado.getApellidos());
-        //empleadoDb.setDireccion(empleado.getDireccion());
-        //empleadoDb.setTelefono(empleado.getTelefono());
-        //empleadoDb.setCui(empleado.getCui());
+        empleadoDb.setNombres(empleado.getNombres());
+        empleadoDb.setApellidos(empleado.getApellidos());
+        empleadoDb.setDireccion(empleado.getDireccion());
+        empleadoDb.setTelefono(empleado.getTelefono());
+        empleadoDb.setCui(empleado.getCui());
         empleadoDb.setSupervisor(empleado.getSupervisor());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(empleadoService.save(empleadoDb));
@@ -111,6 +111,7 @@ public class BaseController {
         clienteDb.setNit(cliente.getNit());
         clienteDb.setDireccion(cliente.getDireccion());
         clienteDb.setCui(cliente.getCui());
+        clienteDb.setEmail(cliente.getEmail());
         clienteDb.setLatitud(cliente.getLatitud());
         clienteDb.setLongitud(cliente.getLongitud());
         //clienteDb.setVisitas(cliente.getVisitas());

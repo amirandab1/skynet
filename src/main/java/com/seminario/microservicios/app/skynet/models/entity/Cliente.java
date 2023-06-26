@@ -32,6 +32,9 @@ public class Cliente {
     @Column(name = "direccion", length = 64)
     private String direccion;
 
+    @Column(name = "email", length = 128)
+    private String email;
+
     @Column(name = "cui", length = 16)
     private String cui;
 
@@ -41,6 +44,13 @@ public class Cliente {
     @Column(name = "longitud", length = 32)
     private String longitud;
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public Long getId() {
         return id;

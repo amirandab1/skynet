@@ -11,10 +11,10 @@ public class BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 32)
+    @Column(length = 128)
     private String nombre;
 
-    @Column(length = 128)
+    @Column(length = 256)
     private String descripcion;
 
     public Long getId() {
